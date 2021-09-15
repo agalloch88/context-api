@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import News from './News/News';
 
+const user = {
+  firstName: 'Ryan',
+  lastName: 'Kirsch',
+  data: 'This is some data',
+};
+
+const UserData = React.createContext();
+export const UserConsumer = UserData.Consumer;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -15,20 +24,22 @@ class App extends Component {
 
   render() {
     return (
-      <div className="containwer-fluid">
-        <div className="navbar-fixed">
-          <nav>
-            <div className="nav-wrapper indigo lighten-4">
-              <a href="/" className="bran-logo center">My Feed</a>
+      <UserData.Provider value={user}>
+        <div className="container-fluid">
+          <div className="navbar-fixed">
+            <nav>
+              <div className="nav-wrapper indigo lighten-4">
+                <a href="/" className="bran-logo center">My Feed</a>
+              </div>
+            </nav>
+          </div>
+          <div className="row">
+            <div className="col s12">
+              <News news={this.state.news} />
             </div>
-          </nav>
-        </div>
-        <div className="row">
-          <div className="col s12">
-            <News news={this.state.news} />
           </div>
         </div>
-      </div>
+      </UserData.Provider>
     );
   }
 }
